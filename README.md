@@ -39,7 +39,7 @@ Le projet a deux issues valables :
 - `pandas`, `numpy`, `scipy`, `matplotlib`
 - `scikit-learn` (métriques, calibration)
 - `pytest` (tests)
-- Interface : **CLI uniquement** pour l'instant (`argparse` ou `typer`)
+- Interface : **CLI uniquement** pour l'instant (`typer`, `rich`)
 - Plus tard : Django
 
 ---
@@ -63,6 +63,7 @@ orunmila/
 │   │   └── dixon_coles.py  # amélioration phase 6
 │   ├── backtest.py         # walk-forward
 │   ├── betting.py          # règles de mise, simulation
+│   ├── ui.py               # affichage et rendu terminal (rich)
 │   └── cli.py              # point d'entrée terminal
 ├── tests/
 ├── reports/                # graphiques et résultats de chaque expérience
@@ -95,6 +96,15 @@ Chaque phase a une **condition de sortie**. On ne passe pas à la suivante tant 
 - Sortie : probabilités 1X2 et plus/moins de 2,5 buts.
 - Backtest **walk-forward** (voir règles).
 - **Sortie :** log loss du modèle comparé à celui des bookmakers.
+
+### Phase 3b : Niveaux de difficulté
+- Étiquette de difficulté par match selon la probabilité maximale estimée par le modèle :
+  - Facile : probabilité maximale >= 0.60
+  - Moyen : probabilité maximale entre 0.45 et 0.60
+  - Difficile : probabilité maximale < 0.45
+- Évaluation des performances par niveau (nombre de matchs, taux de réalisation du favori, log loss du modèle vs bookmakers).
+- Avertissement si un niveau contient moins de 300 matchs (échantillon insuffisant).
+- **Sortie :** analyse des performances par niveau de confiance.
 
 ### Phase 4 : Simulation de paris
 - Règle : parier si `proba_modèle × cote > 1,05` (seuil réglable).
@@ -204,6 +214,7 @@ Aider à construire **Orunmila** en suivant la roadmap de la section 5, dans l'o
 - [ ] Phase 1 : Données
 - [ ] Phase 2 : Niveau des bookmakers
 - [ ] Phase 3 : Modèle v1 Poisson
+- [ ] Phase 3b : Niveaux de difficulté
 - [ ] Phase 4 : Simulation de paris
 - [ ] Phase 5 : Verdict go / no-go
 - [ ] Phase 6 : Améliorations

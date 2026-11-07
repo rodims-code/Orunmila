@@ -16,6 +16,7 @@ matplotlib>=3.8
 
 # --- Interface terminal ---
 typer>=0.12
+rich>=13.0
 
 # --- Tests ---
 pytest>=8.0
