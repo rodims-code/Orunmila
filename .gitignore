@@ -1,0 +1,15 @@
+# Environnement virtuel (se recrée avec : pip install -r requirements.txt)
+.venv/
+
+# Fichiers temporaires de Python
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+
+# Réglages de l'éditeur
+.idea/
+
+# Données téléchargées (se recréent avec : python -m orunmila download)
+data/raw/
+data/processed/

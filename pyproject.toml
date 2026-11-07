@@ -1,0 +1,40 @@
+# ------------------------------------------------------------------
+# pyproject.toml : la "carte d'identité" du projet.
+#
+# POURQUOI CE FICHIER EXISTE :
+# Ton code est rangé dans src/orunmila/. Python ne regarde pas
+# automatiquement dans le dossier "src". Sans ce fichier, la commande
+#     python -m orunmila --help
+# donne l'erreur "No module named orunmila".
+#
+# Avec ce fichier, la commande  pip install -e .  dit à Python :
+# "le paquet orunmila se trouve dans src/, utilise-le directement".
+# Le "-e" (editable) veut dire : si je modifie le code, pas besoin
+# de réinstaller, la modification est prise en compte tout de suite.
+# ------------------------------------------------------------------
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "orunmila"
+version = "0.1.0"
+description = "Analyse statistique de matchs de football : le modèle bat-il les bookmakers ?"
+readme = "README.md"
+requires-python = ">=3.11"
+# Les bibliothèques sont déjà gérées par requirements.txt, donc on ne
+# les répète pas ici.
+dependencies = []
+
+# Crée la commande "orunmila" dans le terminal (en plus de python -m orunmila).
+[project.scripts]
+orunmila = "orunmila.cli:app"
+
+# Dit où chercher le code : dans le dossier src/
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# Dit à pytest où sont les tests.
+[tool.pytest.ini_options]
+testpaths = ["tests"]
